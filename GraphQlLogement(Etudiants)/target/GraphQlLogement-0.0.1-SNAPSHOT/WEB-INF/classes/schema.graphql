@@ -1,0 +1,49 @@
+# Type RendezVous
+type RendezVous {
+    id: Int
+    date: String
+    heure: String
+    logement: Logement
+    numTel: String
+}
+
+# Type Logement
+type Logement {
+    reference: Int
+    adresse: String
+    delegation: String
+    gouvernorat: String
+    type: Type
+    description: String
+    prix: Float
+}
+
+# Enum Type pour les types de logements
+enum Type {
+    Studio
+    Appartement
+    Villa
+    EtageVilla
+}
+
+# Queries pour récupérer les données
+type Querries {
+    listRendezVous: [RendezVous]
+    listLogements: [Logement]
+    logementsByType(type: Type): [Logement]
+    rendezVousById(id: Int): RendezVous
+    rendezVousByLogementRef(reference: Int): [RendezVous]
+}
+
+# Mutations pour modifier les données
+type Mutations {
+    addRendezVous(date: String, heure: String, refLogement: Int, numTel: String): RendezVous
+    updateRendezVous(id: Int, date: String, heure: String, refLogement: Int, numTel: String): RendezVous
+    deleteRendezVous(id: Int): Boolean
+}
+
+# Définition du schéma
+schema {
+    query: Querries
+    mutation: Mutations
+}
